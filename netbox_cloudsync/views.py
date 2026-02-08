@@ -6,7 +6,7 @@ from django.views import View
 from .models import CloudSyncConfig
 from .tables import CloudSyncConfigTable
 from .forms import CloudSyncConfigForm
-from .jobs import CloudSyncJob
+from .jobs.cloudsync import CloudSyncJob
 from django.urls import reverse
 
 
