@@ -23,6 +23,7 @@ The plugin is designed to quickly and safely update VM data without manual inter
 
 ```bash
 cd /opt/netbox/
+source /opt/netbox/venv/bin/activate
 git clone https://github.com/SerhiiZahuba/netbox-vcloud-sync-plugin.git
 pip install -e .
 python3 manage.py migrate netbox_cloudsync
