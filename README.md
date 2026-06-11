@@ -24,7 +24,7 @@
 cd /opt/netbox/
 source /opt/netbox/venv/bin/activate
 pip install netbox-vcloud
-python3 manage.py migrate netbox_cloudsync
+python3 manage.py migrate netbox_vcloud
 ```
 
 ## Settings
@@ -33,7 +33,7 @@ Add to `configuration.py`:
 
 ```python
 PLUGINS = [
-    "netbox_cloudsync",
+    "netbox_vcloud",
 ]
 ```
 
@@ -48,6 +48,6 @@ pytest
 Publish to PyPI from GitHub Actions by pushing a version tag:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.2.0
+git push origin v0.2.0
 ```

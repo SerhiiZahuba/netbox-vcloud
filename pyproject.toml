@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "netbox-vcloud"
-version = "0.1.2"
+version = "0.2.0"
 authors = [
     {name = "Serhii Zahuba", email = "dev@sss.com"},
 ]
@@ -30,7 +30,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["netbox_cloudsync*"]
+include = ["netbox_vcloud*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

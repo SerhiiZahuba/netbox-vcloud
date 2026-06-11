@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-from netbox_cloudsync.sync_utils import (
+from netbox_vcloud.sync_utils import (
     build_basic_auth_header,
     extract_primary_connection,
     normalize_vm_status,

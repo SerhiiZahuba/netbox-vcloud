@@ -5,13 +5,13 @@ except ModuleNotFoundError:  # pragma: no cover - allows lightweight tooling/tes
     config = None
 else:
     class CloudSyncConfig(PluginConfig):
-        name = "netbox_cloudsync"
-        verbose_name = "Cloud Synchronization"
+        name = "netbox_vcloud"
+        verbose_name = "NetBox vCloud"
         description = "Synchronize vCloud VMs into NetBox using ORM"
-        version = "0.1.0"
+        version = "0.2.0"
         author = "Serhii Zahuba"
         author_email = "dev@cre.com"
-        base_url = "cloudsync"
+        base_url = "vcloud"
         required_settings = []
         default_settings = {}
 

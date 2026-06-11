@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('dcim', '0215_rackreservation_status'),
-        ('netbox_cloudsync', '0002_cloudsyncconfig_next_sync'),
+        ('netbox_vcloud', '0002_cloudsyncconfig_next_sync'),
         ('tenancy', '0020_remove_contactgroupmembership'),
         ('virtualization', '0048_populate_mac_addresses'),
     ]
