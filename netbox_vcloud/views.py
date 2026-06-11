@@ -20,6 +20,7 @@ class CloudSyncConfigListView(generic.ObjectListView):
 
 class CloudSyncConfigView(generic.ObjectView):
     queryset = CloudSyncConfig.objects.all()
+    template_name = "netbox_vcloud/cloudsyncconfig.html"
 
     def get_queryset(self, request):
         return CloudSyncConfig.objects.restrict(request.user, 'view')
