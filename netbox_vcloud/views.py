@@ -59,3 +59,10 @@ class RunSyncNowView(View):
             return redirect(reverse("core:job", args=[job.id]))
         except Exception:
             return redirect(f"/core/jobs/{job.id}/")
+
+class CloudSyncConfigBulkDeleteView(generic.BulkDeleteView):
+    queryset = CloudSyncConfig.objects.all()
+    table = CloudSyncConfigTable
+
+    def get_queryset(self, request):
+        return CloudSyncConfig.objects.restrict(request.user, "delete")

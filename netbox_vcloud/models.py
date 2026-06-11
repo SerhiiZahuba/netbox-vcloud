@@ -5,6 +5,7 @@ from netbox.models import NetBoxModel
 from dcim.models import Site, DeviceRole, Platform
 from virtualization.models import Cluster
 from tenancy.models import Tenant
+from django.urls import reverse
 
 
 class CloudSyncConfig(NetBoxModel):
@@ -45,3 +46,10 @@ class CloudSyncConfig(NetBoxModel):
         elif not self.next_sync:
             self.next_sync = timezone.now() + timedelta(minutes=self.sync_interval_minutes)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("plugins:netbox_vcloud:cloudsyncconfig", args=[self.pk])
+
+    @classmethod
+    def get_bulk_delete_url(cls):
+        return reverse("plugins:netbox_vcloud:cloudsyncconfig_bulk_delete")

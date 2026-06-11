@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:pk>/changelog/', views.CloudSyncConfigChangeLogView.as_view(),
              name='cloudsyncconfig_changelog'),
     path('<int:pk>/run/', views.RunSyncNowView.as_view(), name='run_sync_now'),
+    path('delete/', views.CloudSyncConfigBulkDeleteView.as_view(), name='cloudsyncconfig_bulk_delete'),
 ]
