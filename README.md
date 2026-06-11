@@ -1,6 +1,6 @@
 <div align="center">
 
-# ☁️ NetBox CloudSync Plugin  
+# NetBox vCloud Plugin
 ### _Synchronize vCloud Director VMs into NetBox_
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/SerhiiZahuba/netbox-vcloud-sync-plugin?style=social)](https://github.com/SerhiiZahuba/netbox-vcloud-sync-plugin/stargazers)
@@ -12,32 +12,42 @@
 
 ---
 
-## 🚀 Overview
+## Overview
 
-**NetBox CloudSync** — is a plugin for automatic synchronization of virtual machines from **vCloud Director** to **NetBox** using ORM.
-The plugin is designed to quickly and safely update VM data without manual intervention. 
+**NetBox vCloud** is a NetBox plugin for synchronizing virtual machines from **vCloud Director** into NetBox.
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ```bash
 cd /opt/netbox/
 source /opt/netbox/venv/bin/activate
-git clone https://github.com/SerhiiZahuba/netbox-vcloud-sync-plugin.git
-pip install -e .
+pip install netbox-vcloud
 python3 manage.py migrate netbox_cloudsync
 ```
 
 ## Settings
 
-Add to configuration.py
-```
+Add to `configuration.py`:
+
+```python
 PLUGINS = [
-'netbox_cloudsync',
+    "netbox_cloudsync",
 ]
 ```
 
-🔄 Features
+## Development
 
-🧰 Future Plans
+Run tests locally:
+
+```bash
+pytest
+```
+
+Publish to PyPI from GitHub Actions by pushing a version tag:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
