@@ -42,7 +42,10 @@ class CloudSyncJob(JobRunner):
             try:
                 self.logger.info(f"➡️ Sync '{cfg.name}' ({cfg.vcloud_url}) ...")
 
-                self.sync_config(cfg)
+                ok = self.sync_config(cfg)
+                if not ok:
+                    self.logger.error(f"❌ '{cfg.name}' failed")
+                    continue
 
                 # 🕓 Update time sync
                 cfg.last_sync = timezone.now()
@@ -68,7 +71,7 @@ class CloudSyncJob(JobRunner):
         creds_b64 = base64.b64encode(creds.encode()).decode()
 
         token_resp = requests.post(
-            f"{cfg.vcloud_url}/cloudapi/1.0.0/sessions",
+            f"{cfg.vcloud_url.rstrip('/')}/cloudapi/1.0.0/sessions"
             headers={
                 "Authorization": f"Basic {creds_b64}",
                 "Accept": "application/*;version=38.1",
@@ -76,13 +79,20 @@ class CloudSyncJob(JobRunner):
             timeout=15,
         )
         if token_resp.status_code != 200:
-            self.logger.warning(f"❌ Token not received for {cfg.name}")
-            return
+            self.logger.error(
+                f"Auth failed for {cfg.name}: HTTP {token_resp.status_code}; "
+                f"response={token_resp.text[:500]}"
+                )
+            return False
+
 
         vcloud_token = token_resp.headers.get("x-vmware-vcloud-access-token")
         if not vcloud_token:
-            self.logger.warning(f"❌ Empty token in response from {cfg.name}")
-            return
+            self.logger.error(
+                f"Empty token in response from {cfg.name}; headers={dict(token_resp.headers)}"
+                )
+            return False
+
 
         self.logger.info(f"✅ Token received for {cfg.name}")
 
@@ -129,6 +139,8 @@ class CloudSyncJob(JobRunner):
             except Exception as e:
                 self.logger.error(f"⚠️ Error during sync_vm {vm.get('name')}: {e}")
                 continue
+
+    return True
 
     # ======================================================
     # 🧠 Processing a single VM + interfaces + IP
