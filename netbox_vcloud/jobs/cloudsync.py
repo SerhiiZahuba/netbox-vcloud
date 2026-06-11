@@ -140,7 +140,7 @@ class CloudSyncJob(JobRunner):
                 self.logger.error(f"⚠️ Error during sync_vm {vm.get('name')}: {e}")
                 continue
 
-    return True
+        return True
 
     # ======================================================
     # 🧠 Processing a single VM + interfaces + IP
